@@ -1,1 +1,1 @@
-const fn = () => 3;
+const fn = () => 4;
