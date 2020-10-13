@@ -1,1 +1,1 @@
-console.log('GraphQl test');
+const fn = () => 1;
