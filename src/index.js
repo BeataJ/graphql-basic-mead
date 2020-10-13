@@ -1,1 +1,1 @@
-console.log('GraphQl');
+console.log('GraphQl test');
