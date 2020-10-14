@@ -17,6 +17,7 @@
     "@babel/preset-env": "^7.11.5"
   },
   "dependencies": {
+    "@babel/node": "^7.10.5",
     "@babel/polyfill": "^7.11.5"
   }
 }
