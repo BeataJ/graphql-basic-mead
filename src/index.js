@@ -1,1 +1,2 @@
-const fn = () => 5;
+const fn = () => 6;
+console.log('hello');
