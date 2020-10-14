@@ -5,4 +5,8 @@ const name = 'beata';
 
 const location = 'Surrey';
 
-export { message, name, location as default };
+const getGreeting = (name) => {
+  return `Welcome to te course ${name}`;
+};
+
+export { message, name, getGreeting, location as default };
