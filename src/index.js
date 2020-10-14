@@ -3,9 +3,9 @@ import { GraphQLServer } from 'graphql-yoga';
 // Type definations (schema)
 const typeDefs = `
   type Query {
-    hello: String!,
-    name: String!,
-    location: String!,
+    hello: String!
+    name: String!
+    location: String!
     bio: String!
   }
 `;
