@@ -3,7 +3,11 @@ import { GraphQLServer } from 'graphql-yoga';
 // Type definations (schema)
 const typeDefs = `
   type Query {
-    
+    id: ID!
+    name: String!
+    age: Int!
+    employed: Boolean
+    gpa: Flat
   }
 `;
 
