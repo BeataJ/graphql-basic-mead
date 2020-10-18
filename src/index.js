@@ -6,7 +6,7 @@ const typeDefs = `
     id: ID!
     name: String!
     age: Int!
-    employed: Boolean
+    employed: Boolean!
     gpa: Flat
   }
 `;
