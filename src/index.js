@@ -13,7 +13,13 @@ const typeDefs = `
 
 // Resolvers
 const resolvers = {
-  Query: {},
+  Query: {
+    id: () => {},
+    name: () => {},
+    age: () => {},
+    employed: () => {},
+    gpa: () => {},
+  },
 };
 
 const server = new GraphQLServer({
