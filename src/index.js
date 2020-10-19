@@ -9,6 +9,13 @@ const typeDefs = `
     rating: Float
     inStock: Boolean!
   }
+
+  type User {
+    id: ID!
+    name: String!
+    email: String!
+    age: Int
+  }
 `;
 
 // Resolvers
@@ -24,7 +31,7 @@ const resolvers = {
       return 2020;
     },
     rating: () => {
-      return null;
+      return 8;
     },
     inStock: () => {
       return true;
