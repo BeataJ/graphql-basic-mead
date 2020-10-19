@@ -4,6 +4,7 @@ import { GraphQLServer } from 'graphql-yoga';
 const typeDefs = `
   type Query {
     me: User!
+    post: Post!
   }
 
   type User {
@@ -12,25 +13,34 @@ const typeDefs = `
     email: String!
     age: Int
   }
+
+  type Post {
+    id: ID!
+    title: String!
+    body: String!
+    published: Boolean!
+  }
 `;
 
 // Resolvers
 const resolvers = {
   Query: {
-    title: () => {
-      return 'My first release Book';
+    me: () => {
+      return {
+        id: '12345',
+        name: 'Mike',
+        email: 'mail@example.ca',
+      };
     },
-    price: () => {
-      return 12.45;
-    },
-    releaseYear: () => {
-      return 2020;
-    },
-    rating: () => {
-      return 8;
-    },
-    inStock: () => {
-      return true;
+    post: () => {
+      return {
+        id: '98765',
+        title:
+          'Missing couple rescued after frigid night spent in North Shore mountains',
+        body:
+          'Two overdue hikers have been found alive and well by search and rescue crews after spending a cold and wet night stranded in the North Shore. ',
+        published: true,
+      };
     },
   },
 };
