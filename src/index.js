@@ -26,6 +26,9 @@ const typeDefs = `
 // Resolvers
 const resolvers = {
   Query: {
+    greeting: () => {
+      return 'Hello!';
+    },
     me: () => {
       return {
         id: '12345',
