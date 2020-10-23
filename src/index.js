@@ -49,7 +49,9 @@ const typeDefs = `
 // Resolvers
 const resolvers = {
   Query: {
-    users: (parent, args, ctx, info) => {},
+    users: (parent, args, ctx, info) => {
+      return users;
+    },
     me: () => {
       return {
         id: '12345',
