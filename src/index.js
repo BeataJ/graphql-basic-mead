@@ -3,7 +3,7 @@ import { GraphQLServer } from 'graphql-yoga';
 // Type definations (schema)
 const typeDefs = `
   type Query {
-    add(a:Float!, b:Float!):Float!
+    add(number: [Float!]):Float!
     greeting(name:String, position:String):String!
     grades:[Int!]!
     me: User!
