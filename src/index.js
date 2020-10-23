@@ -38,6 +38,9 @@ const resolvers = {
         return 'Hello';
       }
     },
+    grades: (parent, args, ctx, info) => {
+      return [45, 98, 100];
+    },
     me: () => {
       return {
         id: '12345',
