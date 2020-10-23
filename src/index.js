@@ -27,8 +27,8 @@ const typeDefs = `
 const resolvers = {
   Query: {
     greeting: (parent, args, ctx, info) => {
-      if (args.name && args.postion) {
-        return `Hello, ${args.name}! You are my favoriate ${args.postion}`;
+      if (args.name && args.position) {
+        return `Hello, ${args.name}! You are my favoriate ${args.position}`;
       } else {
         return 'Hello';
       }
