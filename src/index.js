@@ -5,6 +5,7 @@ const typeDefs = `
   type Query {
     add(a:Float!, b:Float!):Float!
     greeting(name:String, position:String):String!
+    grades:[Int!]!
     me: User!
     post: Post!
   }
