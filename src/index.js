@@ -84,7 +84,20 @@ const resolvers = {
       });
     },
     posts: (parent, args, ctx, info) => {
-      return posts;
+      if (!args.query) {
+        return users;
+      }
+
+      return posts.filter((post) => {
+        const isTitleMatch = post.title
+          .toLowerCase()
+          .includes(args.query.toLowerCase());
+        const isBodyMatch = post.body
+          .toLowerCase()
+          .includes(args.query.toLowerCase());
+
+        return isTitleMatch || isBodyMatch;
+      });
     },
     me: () => {
       return {
