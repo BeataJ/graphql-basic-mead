@@ -85,7 +85,7 @@ const resolvers = {
     },
     posts: (parent, args, ctx, info) => {
       if (!args.query) {
-        return users;
+        return posts;
       }
 
       return posts.filter((post) => {
