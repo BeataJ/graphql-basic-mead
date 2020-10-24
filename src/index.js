@@ -55,7 +55,7 @@ const resolvers = {
       }
 
       return users.filter((user) => {
-        return user.name.toLowerCase();
+        return user.name.toLowerCase().includes(args.query.toLowerCase());
       });
     },
     me: () => {
