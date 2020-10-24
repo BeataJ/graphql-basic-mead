@@ -30,6 +30,7 @@ const posts = [
     body:
       'One person has been arrested for arson after a large fire destroyed a building in Vancouver Mount Pleasant neighbourhood on Thursday, the blaze leaving at least one family out of a home and several businesses damaged.',
     published: true,
+    author: '2',
   },
   {
     id: '2',
@@ -37,13 +38,15 @@ const posts = [
     body:
       'One person has been arrested for arson after a large fire destroyed a building in Vancouver Mount Pleasant neighbourhood on Thursday, the blaze leaving at least one family out of a home and several businesses damaged.',
     published: true,
+    author: '3',
   },
   {
-    id: '1',
+    id: '3',
     title: 'Third Post',
     body:
       'One person has been arrested for arson after a large fire destroyed a building in Vancouver Mount Pleasant neighbourhood on Thursday, the blaze leaving at least one family out of a home and several businesses damaged.',
     published: false,
+    author: '1',
   },
 ];
 
@@ -68,6 +71,7 @@ const typeDefs = `
     title: String!
     body: String!
     published: Boolean!
+    author: User!
   }
 `;
 
