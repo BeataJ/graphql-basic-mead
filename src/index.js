@@ -6,18 +6,18 @@ import { GraphQLServer } from 'graphql-yoga';
 const users = [
   {
     id: '1',
-    name: 'beata',
+    name: 'Beata',
     email: 'beata@example.com',
     age: 30,
   },
   {
     id: '2',
-    name: 'bob',
+    name: 'Bob',
     email: 'bob@example.com',
   },
   {
     id: '3',
-    name: 'emy',
+    name: 'Emy',
     email: 'emy@example.com',
     age: 50,
   },
@@ -50,7 +50,13 @@ const typeDefs = `
 const resolvers = {
   Query: {
     users: (parent, args, ctx, info) => {
-      return users;
+      if (!args.query) {
+        return users;
+      }
+
+      return users.filter((user) => {
+        return user.name.toLowerCase();
+      });
     },
     me: () => {
       return {
