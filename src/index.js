@@ -26,7 +26,7 @@ const users = [
 // Type definations (schema)
 const typeDefs = `
   type Query {
-    users: [User!]!
+    users(query:String): [User!]!
     me: User!
     post: Post!
   }
