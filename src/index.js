@@ -23,6 +23,30 @@ const users = [
   },
 ];
 
+const posts = [
+  {
+    id: '1',
+    title: 'First Post',
+    body:
+      'One person has been arrested for arson after a large fire destroyed a building in Vancouver Mount Pleasant neighbourhood on Thursday, the blaze leaving at least one family out of a home and several businesses damaged.',
+    published: true,
+  },
+  {
+    id: '2',
+    title: 'Second Post',
+    body:
+      'One person has been arrested for arson after a large fire destroyed a building in Vancouver Mount Pleasant neighbourhood on Thursday, the blaze leaving at least one family out of a home and several businesses damaged.',
+    published: true,
+  },
+  {
+    id: '1',
+    title: 'Third Post',
+    body:
+      'One person has been arrested for arson after a large fire destroyed a building in Vancouver Mount Pleasant neighbourhood on Thursday, the blaze leaving at least one family out of a home and several businesses damaged.',
+    published: false,
+  },
+];
+
 // Type definations (schema)
 const typeDefs = `
   type Query {
