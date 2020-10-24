@@ -51,6 +51,7 @@ const posts = [
 const typeDefs = `
   type Query {
     users(query:String): [User!]!
+    posts(query:String): [Post!]!
     me: User!
     post: Post!
   }
@@ -81,6 +82,9 @@ const resolvers = {
       return users.filter((user) => {
         return user.name.toLowerCase().includes(args.query.toLowerCase());
       });
+    },
+    posts: (parent, args, ctx, info) => {
+      return posts;
     },
     me: () => {
       return {
