@@ -173,6 +173,11 @@ const resolvers = {
         return post.author === parent.id;
       });
     },
+    comments: (parent, args, ctx, info) => {
+      return comments.filter((comment) => {
+        return comment.author === parent.id;
+      });
+    },
   },
   Comment: {
     author: (parent, args, ctx, info) => {
