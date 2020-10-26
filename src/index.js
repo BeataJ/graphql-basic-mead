@@ -75,6 +75,7 @@ const typeDefs = `
     posts(query:String): [Post!]!
     me: User!
     post: Post!
+    comments: [Comment]!
   }
 
   type User {
@@ -143,6 +144,9 @@ const resolvers = {
           'Two overdue hikers have been found alive and well by search and rescue crews after spending a cold and wet night stranded in the North Shore. ',
         published: true,
       };
+    },
+    comments: (parent, args, ctx, info) => {
+      return comments;
     },
   },
   Post: {
