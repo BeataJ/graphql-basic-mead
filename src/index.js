@@ -56,24 +56,28 @@ const comments = [
     text:
       'However, parents on a budget have long found ways to torment their children by circumventing societal norms and piecing together Halloween costumes themselves.Such was the case in 1995, when a Midday correspondent demonstrated ',
     author: '1',
+    post: '1',
   },
   {
     id: '11',
     text:
       'But why limit the discussion to costumes when so much of Halloween is about the celebrations?  ',
     author: '3',
+    post: '3',
   },
   {
     id: '12',
     text:
       'In the segment, party planner Barbara Kirschenblatt also suggests some spooky party games to entertain teens. ',
     author: '3',
+    post: '2',
   },
   {
     id: '13',
     text:
       'In the segment, party planner Barbara Kirschenblatt also suggests some spooky party games to entertain teens. ',
     author: '2',
+    post: '1',
   },
 ];
 
