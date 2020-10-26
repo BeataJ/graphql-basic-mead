@@ -131,8 +131,8 @@ const resolvers = {
   },
   User: {
     posts: (parent, args, ctx, info) => {
-      return posts.find((post) => {
-        return post.id === parent.posts;
+      return posts.filter((post) => {
+        return post.author === parent.id;
       });
     },
   },
