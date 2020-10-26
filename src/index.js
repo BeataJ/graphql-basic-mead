@@ -190,6 +190,11 @@ const resolvers = {
         return user.id === parent.author;
       });
     },
+    post: (parent, args, ctx, info) => {
+      return posts.find((post) => {
+        return post.id === parent.post;
+      });
+    },
   },
 };
 
