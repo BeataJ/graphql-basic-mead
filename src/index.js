@@ -62,7 +62,12 @@ const comments = [
       'But why limit the discussion to costumes when so much of Halloween is about the celebrations?  ',
   },
   {
-    id: '10',
+    id: '12',
+    text:
+      'In the segment, party planner Barbara Kirschenblatt also suggests some spooky party games to entertain teens. ',
+  },
+  {
+    id: '13',
     text:
       'In the segment, party planner Barbara Kirschenblatt also suggests some spooky party games to entertain teens. ',
   },
