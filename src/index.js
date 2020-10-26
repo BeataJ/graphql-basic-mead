@@ -80,7 +80,7 @@ const typeDefs = `
     posts(query:String): [Post!]!
     me: User!
     post: Post!
-    comments: [Comment]!
+    comments: [Comment!]!
   }
 
   type User {
