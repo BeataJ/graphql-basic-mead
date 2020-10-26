@@ -108,6 +108,7 @@ const typeDefs = `
     id: ID!
     text: String!
     author: User!
+    post: Post!
   }
 `;
 
