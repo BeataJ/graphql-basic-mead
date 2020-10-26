@@ -64,6 +64,7 @@ const typeDefs = `
     name: String!
     email: String!
     age: Int
+    posts: [Post!]!
   }
 
   type Post {
@@ -119,6 +120,20 @@ const resolvers = {
           'Two overdue hikers have been found alive and well by search and rescue crews after spending a cold and wet night stranded in the North Shore. ',
         published: true,
       };
+    },
+  },
+  Post: {
+    author: (parent, args, ctx, info) => {
+      return users.find((user) => {
+        return user.id === parent.author;
+      });
+    },
+  },
+  User: {
+    posts: (parent, args, ctx, info) => {
+      return posts.find((post) => {
+        return post.id === parent.posts;
+      });
     },
   },
 };
