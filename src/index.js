@@ -173,6 +173,13 @@ const resolvers = {
       });
     },
   },
+  Comment: {
+    author: (parent, args, ctx, info) => {
+      return users.find((user) => {
+        return user.id === parent.author;
+      });
+    },
+  },
 };
 
 const server = new GraphQLServer({
