@@ -170,6 +170,11 @@ const resolvers = {
       return comments;
     },
   },
+  Mutation: {
+    createUser: (parent, args, ctx, info) => {
+      console.log(args);
+    },
+  },
   Post: {
     author: (parent, args, ctx, info) => {
       return users.find((user) => {
