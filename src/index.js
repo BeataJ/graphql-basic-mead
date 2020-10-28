@@ -210,6 +210,27 @@ const resolvers = {
 
       return post;
     },
+    createComment: (parent, args, ctx, info) => {
+      const userExist = users.some((user) => user.id === args.author);
+      const postExistPublish = posts.some(
+        (post) => post.id === args.post && post.published
+      );
+
+      if (!userExist || !postExistPublish) {
+        throw new Error('User not exist or post not exist');
+      }
+
+      const comment = {
+        id: uuidv4(),
+        text: args.text,
+        author: args.author,
+        post: args.post,
+      };
+
+      comments.push(comment);
+
+      return comment;
+    },
   },
   Post: {
     author: (parent, args, ctx, info) => {
