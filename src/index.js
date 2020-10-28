@@ -173,6 +173,7 @@ const resolvers = {
   },
   Mutation: {
     createUser: (parent, args, ctx, info) => {
+      const emailTaken = users.some((user) => user.email === args.email);
       console.log(args);
     },
   },
