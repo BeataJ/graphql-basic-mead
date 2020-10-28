@@ -174,7 +174,20 @@ const resolvers = {
   Mutation: {
     createUser: (parent, args, ctx, info) => {
       const emailTaken = users.some((user) => user.email === args.email);
-      console.log(args);
+
+      if (emailTaken) {
+        throw new Error('Email Taken');
+      }
+
+      const user = {
+        id: uuidv4(),
+        name: args.name,
+        email: args.email,
+        age: args.age,
+      };
+
+      users.push(user);
+      return user;
     },
   },
   Post: {
