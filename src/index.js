@@ -95,7 +95,7 @@ const typeDefs = `
   type Mutation {
     createUser(data: CreateUserInput):User!
     createPost(data: CreatePostInput): Post!
-    createComment(text:String!, author: ID!, post: ID!):Comment!
+    createComment(data: CreateCommentInput):Comment!
   }
 
   input CreateUserInput {
@@ -109,6 +109,12 @@ const typeDefs = `
     body: String!, 
     published: Boolean!, 
     author: ID!
+  }
+
+  input CreateCommentInput {
+    text:String!, 
+    author: ID!, 
+    post: ID!
   }
 
   type User {
