@@ -100,7 +100,7 @@ const typeDefs = `
 
   input CreateUserInput {
     name: String!,
-    email: String,
+    email: String!,
     age: Int
   }
 
@@ -181,7 +181,7 @@ const resolvers = {
   },
   Mutation: {
     createUser: (parent, args, ctx, info) => {
-      const emailTaken = users.some((user) => user.email === args.email);
+      const emailTaken = users.some((user) => user.email === args.data.email);
 
       if (emailTaken) {
         throw new Error('Email Taken');
@@ -189,7 +189,7 @@ const resolvers = {
 
       const user = {
         id: uuidv4(),
-        ...args,
+        ...args.data,
       };
 
       users.push(user);
