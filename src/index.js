@@ -218,6 +218,18 @@ const resolvers = {
 
       const deleteUsers = users.splice(userIndex, 1);
 
+      posts = posts.filter((post) => {
+        const match = post.author === args.id;
+
+        if (match) {
+          comments = comments.filter((comment) => comment.post !== post.id);
+        }
+
+        return !match;
+      });
+
+      comments = comments.filter((comment) => comment.author !== args.id);
+
       return deleteUsers[0];
     },
     createPost: (parent, args, ctx, info) => {
