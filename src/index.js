@@ -209,6 +209,17 @@ const resolvers = {
       users.push(user);
       return user;
     },
+    deleteUser: (parent, args, ctx, info) => {
+      const userIndex = users.findIndex((user) => user.id === args.id);
+
+      if (userIndex === -1) {
+        throw new Error('User not find');
+      }
+
+      const deleteUsers = users.splice(userIndex, 1);
+
+      return deleteUsers[0];
+    },
     createPost: (parent, args, ctx, info) => {
       const userExist = users.some((user) => user.id === args.data.author);
 
