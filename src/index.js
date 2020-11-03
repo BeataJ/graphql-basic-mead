@@ -282,6 +282,19 @@ const resolvers = {
 
       return comment;
     },
+    deleteComment: (parent, args, ctx, info) => {
+      const commentIndex = comments.findIndex(
+        (comment) => comment.id === args.id
+      );
+
+      if (commentIndex === -1) {
+        throw new Error('Comment not found');
+      }
+
+      const deleteComment = comments.splice(commentIndex, 1);
+
+      return deleteComment[0];
+    },
   },
   Post: {
     author: (parent, args, ctx, info) => {
