@@ -1,105 +1,25 @@
 import { GraphQLServer } from 'graphql-yoga';
 import { v4 as uuidv4 } from 'uuid';
-
-// Scalar types - String, Boolean, Int, Float
-
-// Demo user data
-let users = [
-  {
-    id: '1',
-    name: 'Beata',
-    email: 'beata@example.com',
-    age: 30,
-  },
-  {
-    id: '2',
-    name: 'Bob',
-    email: 'bob@example.com',
-  },
-  {
-    id: '3',
-    name: 'Emy',
-    email: 'emy@example.com',
-    age: 50,
-  },
-];
-
-let posts = [
-  {
-    id: '1',
-    title: 'First Post',
-    body:
-      'One person has been arrested for arson after a large fire destroyed a building in Vancouver Mount Pleasant neighbourhood on Thursday, the blaze leaving at least one family out of a home and several businesses damaged.',
-    published: true,
-    author: '2',
-  },
-  {
-    id: '2',
-    title: 'Second Post',
-    body:
-      'One person has been arrested for arson after a large fire destroyed a building in Vancouver Mount Pleasant neighbourhood on Thursday, the blaze leaving at least one family out of a home and several businesses damaged.',
-    published: true,
-    author: '3',
-  },
-  {
-    id: '3',
-    title: 'Third Post',
-    body:
-      'One person has been arrested for arson after a large fire destroyed a building in Vancouver Mount Pleasant neighbourhood on Thursday, the blaze leaving at least one family out of a home and several businesses damaged.',
-    published: false,
-    author: '1',
-  },
-];
-
-let comments = [
-  {
-    id: '10',
-    text:
-      'However, parents on a budget have long found ways to torment their children by circumventing societal norms and piecing together Halloween costumes themselves.Such was the case in 1995, when a Midday correspondent demonstrated ',
-    author: '1',
-    post: '1',
-  },
-  {
-    id: '11',
-    text:
-      'But why limit the discussion to costumes when so much of Halloween is about the celebrations?  ',
-    author: '3',
-    post: '3',
-  },
-  {
-    id: '12',
-    text:
-      'In the segment, party planner Barbara Kirschenblatt also suggests some spooky party games to entertain teens. ',
-    author: '3',
-    post: '2',
-  },
-  {
-    id: '13',
-    text:
-      'In the segment, party planner Barbara Kirschenblatt also suggests some spooky party games to entertain teens. ',
-    author: '2',
-    post: '1',
-  },
-];
+import db from './db';
 
 // Resolvers
 const resolvers = {
   Query: {
-    users: (parent, args, ctx, info) => {
+    users: (parent, args, { db }, info) => {
       if (!args.query) {
-        return users;
+        return db.users;
       }
 
-      return users.filter((user) => {
+      return db.users.filter((user) => {
         return user.name.toLowerCase().includes(args.query.toLowerCase());
       });
     },
-    posts: (parent, args, ctx, info) => {
+    posts: (parent, args, { db }, info) => {
       if (!args.query) {
-        return posts;
+        return db.posts;
       }
 
-      return posts.filter((post) => {
+      return db.posts.filter((post) => {
         const isTitleMatch = post.title
           .toLowerCase()
           .includes(args.query.toLowerCase());
@@ -109,6 +29,9 @@ const resolvers = {
 
         return isTitleMatch || isBodyMatch;
       });
+    },
+    comments: (parent, args, { db }, info) => {
+      return db.comments;
     },
     me: () => {
       return {
@@ -127,13 +50,12 @@ const resolvers = {
         published: true,
       };
     },
-    comments: (parent, args, ctx, info) => {
-      return comments;
-    },
   },
   Mutation: {
-    createUser: (parent, args, ctx, info) => {
-      const emailTaken = users.some((user) => user.email === args.data.email);
+    createUser: (parent, args, { db }, info) => {
+      const emailTaken = db.users.some(
+        (user) => user.email === args.data.email
+      );
 
       if (emailTaken) {
         throw new Error('Email Taken');
@@ -144,34 +66,36 @@ const resolvers = {
         ...args.data,
       };
 
-      users.push(user);
+      db.users.push(user);
       return user;
     },
-    deleteUser: (parent, args, ctx, info) => {
-      const userIndex = users.findIndex((user) => user.id === args.id);
+    deleteUser: (parent, args, { db }, info) => {
+      const userIndex = db.users.findIndex((user) => user.id === args.id);
 
       if (userIndex === -1) {
         throw new Error('User not find');
       }
 
-      const deleteUsers = users.splice(userIndex, 1);
+      const deleteUsers = db.users.splice(userIndex, 1);
 
-      posts = posts.filter((post) => {
+      db.posts = db.posts.filter((post) => {
         const match = post.author === args.id;
 
         if (match) {
-          comments = comments.filter((comment) => comment.post !== post.id);
+          db.comments = db.comments.filter(
+            (comment) => comment.post !== post.id
+          );
         }
 
         return !match;
       });
 
-      comments = comments.filter((comment) => comment.author !== args.id);
+      db.comments = db.comments.filter((comment) => comment.author !== args.id);
 
       return deleteUsers[0];
     },
-    createPost: (parent, args, ctx, info) => {
-      const userExist = users.some((user) => user.id === args.data.author);
+    createPost: (parent, args, { db }, info) => {
+      const userExist = db.users.some((user) => user.id === args.data.author);
 
       if (!userExist) {
         throw new Error('User not found');
@@ -182,26 +106,26 @@ const resolvers = {
         ...args.data,
       };
 
-      posts.push(post);
+      db.posts.push(post);
 
       return post;
     },
-    deletePost: (parent, args, ctx, info) => {
-      const postIndex = posts.findIndex((post) => post.id === args.id);
+    deletePost: (parent, args, { db }, info) => {
+      const postIndex = db.posts.findIndex((post) => post.id === args.id);
 
       if (postIndex === -1) {
         throw new Error('Post not found');
       }
 
-      const deletedPosts = posts.splice(postIndex, 1);
+      const deletedPosts = db.posts.splice(postIndex, 1);
 
-      comments = comments.filter((comment) => comment.post !== args.id);
+      db.comments = db.comments.filter((comment) => comment.post !== args.id);
 
       return deletedPosts[0];
     },
-    createComment: (parent, args, ctx, info) => {
-      const userExist = users.some((user) => user.id === args.data.author);
-      const postExistPublish = posts.some(
+    createComment: (parent, args, { db }, info) => {
+      const userExist = db.users.some((user) => user.id === args.data.author);
+      const postExistPublish = db.posts.some(
         (post) => post.id === args.data.post && post.published
       );
 
@@ -214,12 +138,12 @@ const resolvers = {
         ...args.data,
       };
 
-      comments.push(comment);
+      db.comments.push(comment);
 
       return comment;
     },
-    deleteComment: (parent, args, ctx, info) => {
-      const commentIndex = comments.findIndex(
+    deleteComment: (parent, args, { db }, info) => {
+      const commentIndex = db.comments.findIndex(
         (comment) => comment.id === args.id
       );
 
@@ -227,43 +151,43 @@ const resolvers = {
         throw new Error('Comment not found');
       }
 
-      const deleteComment = comments.splice(commentIndex, 1);
+      const deleteComment = db.comments.splice(commentIndex, 1);
 
       return deleteComment[0];
     },
   },
   Post: {
-    author: (parent, args, ctx, info) => {
-      return users.find((user) => {
+    author: (parent, args, { db }, info) => {
+      return db.users.find((user) => {
         return user.id === parent.author;
       });
     },
-    comments: (parent, args, ctx, info) => {
-      return comments.filter((comment) => {
+    comments: (parent, args, { db }, info) => {
+      return db.comments.filter((comment) => {
         return comment.post === parent.id;
       });
     },
   },
   User: {
-    posts: (parent, args, ctx, info) => {
-      return posts.filter((post) => {
+    posts: (parent, args, { db }, info) => {
+      return db.posts.filter((post) => {
         return post.author === parent.id;
       });
     },
-    comments: (parent, args, ctx, info) => {
-      return comments.filter((comment) => {
+    comments: (parent, args, { db }, info) => {
+      return db.comments.filter((comment) => {
         return comment.author === parent.id;
       });
     },
   },
   Comment: {
-    author: (parent, args, ctx, info) => {
-      return users.find((user) => {
+    author: (parent, args, { db }, info) => {
+      return db.users.find((user) => {
         return user.id === parent.author;
       });
     },
-    post: (parent, args, ctx, info) => {
-      return posts.find((post) => {
+    post: (parent, args, { db }, info) => {
+      return db.posts.find((post) => {
         return post.id === parent.post;
       });
     },
@@ -273,6 +197,9 @@ const resolvers = {
 const server = new GraphQLServer({
   typeDefs: './src/schema.graphql',
   resolvers,
+  context: {
+    db,
+  },
 });
 
 server.start(() => {
