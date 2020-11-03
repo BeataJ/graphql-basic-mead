@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 // Scalar types - String, Boolean, Int, Float
 
 // Demo user data
-const users = [
+let users = [
   {
     id: '1',
     name: 'Beata',
@@ -24,7 +24,7 @@ const users = [
   },
 ];
 
-const posts = [
+let posts = [
   {
     id: '1',
     title: 'First Post',
@@ -51,7 +51,7 @@ const posts = [
   },
 ];
 
-const comments = [
+let comments = [
   {
     id: '10',
     text:
