@@ -249,6 +249,19 @@ const resolvers = {
 
       return post;
     },
+    deletePost: (parent, args, ctx, info) => {
+      const postIndex = posts.findIndex((post) => post.id === args.id);
+
+      if (postIndex === -1) {
+        throw new Error('Post not found');
+      }
+
+      const deletedPosts = posts.splice(postIndex, 1);
+
+      comments = comments.filter((comment) => comment.post !== args.id);
+
+      return deletedPosts[0];
+    },
     createComment: (parent, args, ctx, info) => {
       const userExist = users.some((user) => user.id === args.data.author);
       const postExistPublish = posts.some(
