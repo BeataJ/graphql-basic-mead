@@ -1,3 +1,4 @@
+import { PubSub } from 'graphql-yoga';
 import { v4 as uuidv4 } from 'uuid';
 
 const Mutation = {
@@ -134,6 +135,7 @@ const Mutation = {
     };
 
     db.comments.push(comment);
+    pubsub.published(`comment ${args.data.post}`, { comment });
 
     return comment;
   },
