@@ -33,7 +33,7 @@ const posts = [
     body:
       'One person has been arrested for arson after a large fire destroyed a building in Vancouver Mount Pleasant neighbourhood on Thursday, the blaze leaving at least one family out of a home and several businesses damaged.',
     published: true,
-    author: '3',
+    author: '2',
   },
   {
     id: '3',
