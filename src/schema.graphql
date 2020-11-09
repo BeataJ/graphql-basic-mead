@@ -82,3 +82,8 @@ type Comment {
   author: User!
   post: Post!
 }
+
+type PostSubscriptionPlayload {
+  mutation: String!
+  data: Post!
+}
