@@ -178,7 +178,12 @@ const Mutation = {
     };
 
     db.comments.push(comment);
-    pubsub.publish(`comment ${args.data.post}`, { comment });
+    pubsub.publish(`comment ${args.data.post}`, {
+      comment: {
+        mutation: 'CREATED',
+        data: comment,
+      },
+    });
 
     return comment;
   },
