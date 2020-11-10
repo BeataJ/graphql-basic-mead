@@ -197,7 +197,7 @@ const Mutation = {
     }
 
     const [deleteComment] = db.comments.splice(commentIndex, 1);
-    pubsub.publish(`comment ${postId}`, {
+    pubsub.publish(`comment ${deleteComment.post}`, {
       comment: {
         mutation: 'DELETED',
         data: deleteComment,
@@ -217,7 +217,7 @@ const Mutation = {
     if (typeof data.text === 'string') {
       comment.text = data.text;
     }
-    pubsub.publish(`comment ${postId}`, {
+    pubsub.publish(`comment ${comment.post}`, {
       comment: {
         mutation: 'UPDATED',
         data: comment,
